@@ -71,6 +71,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-markdown" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/09/17/markdown/" class="article-date">
+  <time class="dt-published" datetime="2025-09-17T08:22:34.000Z" itemprop="datePublished">2025-09-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/09/17/markdown/">markdown</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="markdown语法"><a href="#markdown语法" class="headerlink" title="markdown语法"></a>markdown语法</h1><ul>
+<li>插入图片<code>![图片](链接)</code></li>
+<li>插入链接<code>[文字](链接)</code></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/09/17/markdown/" data-id="cmfnrff070000vsumbtzqeceb" data-title="markdown" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/md/" rel="tag">md</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-多模态图" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2025/09/17/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%9B%BE/" class="article-date">
@@ -103,8 +147,15 @@
 </ul>
 <ol>
 <li>多模态场景图生成<ul>
-<li>视觉场景图表示：为实现图像中物体及其语义关系的结构化建模，视觉模态采用基于目标检测和图神经推理的场景图构建流程。该模块包含三个阶段：Target Area Proposals、特征提取和场景图推理。<ul>
-<li>Target Area Proposals：采用Faster RCNN作为基础目标检测器，给定可见图像 $I_vi$，RPN通过多尺度特征金字塔预测出一组候选边界框B &#x3D; {b1，b2，…，bn}，其中每个边界框对应一个潜在物体区域；这些区域随后作为场景图结构中的实体节点（物体-属性对）。</li>
+<li>视觉场景图表示：为实现图像中物体及其语义关系的结构化建模，视觉模态采用基于目标检测和图神经推理的场景图构建流程。该模块包含三个阶段：Target Area Proposals、Feature Extraction和Scene Graph Reasoning。<ul>
+<li>Target Area Proposals：采用Faster RCNN作为基础目标检测器，给定可见图像 $I_vi$，RPN通过多尺度特征金字塔预测出一组候选边界框$B &#x3D; {b1，b2，…，bn}$，其中每个边界框对应一个潜在物体区域；这些区域随后作为场景图结构中的实体节点（物体-属性对）。</li>
+<li>Feature Extraction：区域级特征从上述候选框的主干特征图中提取，用于初始化场景图节点的视觉表征。具体而言，对于每个候选框$bi$，在固定空间分辨率下应用ROI池化操作，从而从主干特征图F中获取对应的视觉特征向量$fi∈Rd$：$fi &#x3D; ROIpool(F, bi)$,其中向量fi捕捉候选框bi在其空间位置上的语义表示，并作为输入图神经网络的初始节点特征。然而，仅对目标节点进行建模并不足以捕捉实体之间的结构依赖性和空间交互作用。为了进一步探索候选对象之间的上下文语义关系，需要构建一个联合框。对于每一对候选框（bi，bj），定义其交互区域为：ui→j&#x3D;bi∪bj，并基于视觉特征图F提取该区域的特征：fi→j&#x3D;ROIpool（F，ui→j）。至此，每个候选对象对（bi，bj）都获得了由三个特征组成的三元组(fi，fj，fi→j），分别表征其语义实体、交互目标和空间关系，从而为后续的图神经语义推理提供表征支持。</li>
+<li>Scene Graph Reasoning：为实现对象节点与关系边之间的交互式关联，本研究提出了一种基于门控循环单元（GRU）的迭代图神经网络（GNN），作为场景图推理模块。在构建的图结构中，节点代表对象实体，边则编码实体间的语义关系（如空间或功能依赖）。该模块通过多轮信息传递更新图状态，从而实现语义增强与结构感知。<br><img src="/../image/MSG2.png" alt="公式">经过多轮迭代后，节点和边的隐藏状态封装了上下文语义信息，从而形成了完整的图级嵌入。为了获得最终的视觉场景图表示，模型会对图节点进行筛选，选取得分最高的n个对象节点{o1，o2，…，on}及其关联关系，构建出一系列局部子图：Gk &#x3D; (ok, Rk), k &#x3D; 1, . . . , n其中Rk表示连接对象ok与其他节点的语义边集合。针对每个子图Gk，我们引入一个读出函数来聚合其节点和边的隐藏状态，从而生成最终的嵌入向量vk∈R d：vk &#x3D; Readout({hi}i∈Gk,{hi-&gt;j}(i,j)∈Gk）</li>
+</ul>
+</li>
+<li>文本场景图表示：为实现文本描述中对象及其语义关系的结构化建模，我们采用基于句法分析和GRU的语言模态文本场景图构建流程。该模块包含四个核心阶段：scene graph parsing, semantic concept encoding, object–attribute graph attention, and object–object relation graph attention.<ul>
+<li>Scene Graph Parsing：给定自然语言描述y，首先采用基于依存句法分析的规则解析器，将句子转换为结构化场景图表示G &#x3D;（V，E）。该图明确编码了文本中的语义实体及其关系，从而提供更清晰显著的拓扑结构，便于后续跨模态语义对齐与融合。具体而言，节点集V &#x3D; O∪A包含对象节点O &#x3D; {oi}和属性节点A &#x3D; {ai}，边集E &#x3D; EOA∪EOO由对象-属性边EOA⊆O×A和对象-对象关系边EOO⊆O×O构成。解析器首先识别输入文本中的语义实体（名词短语）和属性修饰语（形容词短语），随后利用语义谓词（如介词或动词短语）构建实体间关系。为提高解析精度，我们专门设计了专用于代词消解、复数实体分解和数值规范化处理的规则，确保生成的场景图具有更高的语义保真度和结构精细度。</li>
+<li>Semantic Concept Encoding：参数未解释，有待进一步研究。</li>
 </ul>
 </li>
 </ul>
@@ -301,7 +352,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML-PAPER/" rel="tag">ML,PAPER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML-PAPER/" rel="tag">ML,PAPER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md/" rel="tag">md</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
     </div>
   </div>
 
@@ -311,7 +362,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ML-PAPER/" style="font-size: 10px;">ML,PAPER</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+      <a href="/tags/ML-PAPER/" style="font-size: 10px;">ML,PAPER</a> <a href="/tags/md/" style="font-size: 10px;">md</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
     </div>
   </div>
 
@@ -331,6 +382,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2025/09/17/markdown/">markdown</a>
+          </li>
         
           <li>
             <a href="/2025/09/17/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%9B%BE/">多模态图</a>
