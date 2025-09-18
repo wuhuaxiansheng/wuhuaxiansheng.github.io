@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>hexo使用 | Hexo</title>
+  <title>llm基础 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="windows 配置hexo 安装node.js(目前不理解是具体干嘛的) 安装cnpmnpm i -g cnpm --registry.npm.taobao.org 安装hexocnpm install -g hexo-cli 初始化目录  12345d:cd filemkdir blogcd bloghexo init  # 初始化  创建新文档hexo new &quot;我的第一篇hexo">
+  <meta name="description" content="llm训练和微调的基础教程：《从零开始的 LLM》">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo使用">
-<meta property="og:url" content="http://example.com/2025/09/17/hexo%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:title" content="llm基础">
+<meta property="og:url" content="http://example.com/2025/09/18/llm%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="windows 配置hexo 安装node.js(目前不理解是具体干嘛的) 安装cnpmnpm i -g cnpm --registry.npm.taobao.org 安装hexocnpm install -g hexo-cli 初始化目录  12345d:cd filemkdir blogcd bloghexo init  # 初始化  创建新文档hexo new &quot;我的第一篇hexo">
+<meta property="og:description" content="llm训练和微调的基础教程：《从零开始的 LLM》">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-09-17T06:35:13.000Z">
-<meta property="article:modified_time" content="2025-09-17T06:54:50.814Z">
+<meta property="article:published_time" content="2025-09-18T07:21:23.000Z">
+<meta property="article:modified_time" content="2025-09-18T07:24:44.723Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="web">
+<meta property="article:tag" content="LLM">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -74,10 +74,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-hexo使用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-llm基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2025/09/17/hexo%E4%BD%BF%E7%94%A8/" class="article-date">
-  <time class="dt-published" datetime="2025-09-17T06:35:13.000Z" itemprop="datePublished">2025-09-17</time>
+    <a href="/2025/09/18/llm%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time class="dt-published" datetime="2025-09-18T07:21:23.000Z" itemprop="datePublished">2025-09-18</time>
 </a>
     
   </div>
@@ -88,7 +88,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      hexo使用
+      llm基础
     </h1>
   
 
@@ -96,38 +96,16 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="windows-配置hexo"><a href="#windows-配置hexo" class="headerlink" title="windows 配置hexo"></a>windows 配置hexo</h1><ol>
-<li>安装<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/download">node.js</a>(目前不理解是具体干嘛的)</li>
-<li>安装cnpm<code>npm i -g cnpm --registry.npm.taobao.org</code></li>
-<li>安装hexo<code>cnpm install -g hexo-cli</code></li>
-<li>初始化目录</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d:</span><br><span class="line">cd file</span><br><span class="line">mkdir blog</span><br><span class="line">cd blog</span><br><span class="line">hexo init  # 初始化</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>创建新文档<code>hexo new &quot;我的第一篇hexo博客&quot;</code></li>
-<li>将博客部署到github上<ul>
-<li>首先创建一个新的仓库： 仓库名是固定的：必须是你的用户名.github.io</li>
-<li>回到windows终端安装一个插件<code>cnpm install --save hexo-deployer-git</code></li>
-<li>修改配置文件_config.yml（就在博客目录下）,在最下方找到 Deployment,修改配置如下(注意：每个冒号后都要有空格)：</li>
-</ul>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment </span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment </span><br><span class="line">deploy: </span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/wuhuaxiansheng/wuhuaxiansheng.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
-<ul>
-<li>window执行<code>npm install hexo-deployer-git --save</code></li>
-</ul>
-</li>
-<li>最后依次执行</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 清理 Hexo 缓存</span><br><span class="line">hexo clean</span><br><span class="line"># 重新生成静态文件</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-
+        <p>llm训练和微调的基础教程：《从零开始的 LLM》</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/09/17/hexo%E4%BD%BF%E7%94%A8/" data-id="cmfnri0os0002hcum2e9vght1" data-title="hexo使用" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/09/18/llm%E5%9F%BA%E7%A1%80/" data-id="cmfp35rwd00005cumfixd1xt3" data-title="llm基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li></ul>
 
     </footer>
   </div>
@@ -135,19 +113,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2025/09/17/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%9B%BE/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          多模态图
-        
-      </div>
-    </a>
   
-  
-    <a href="/2025/09/17/first/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2025/09/17/linux/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">first</div>
+      <div class="article-nav-title">linux</div>
     </a>
   
 </nav>
