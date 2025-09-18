@@ -1,538 +1,169 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Hexo",
+  "alternateName": [
+    "example.com"
+  ],
+  "url": "http://example.com/"
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
 
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
   
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
     
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
   
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
-
-<meta name="generator" content="Hexo 7.3.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Hexo',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Hexo</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">Hexo</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/09/18/llm%E5%9F%BA%E7%A1%80/" title="llm基础">llm基础</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-09-18T07:21:23.000Z" title="Created 2025-09-18 15:21:23">2025-09-18</time></span></div><div class="content">llm训练和微调的基础教程：《从零开始的 LLM》 </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/09/17/linux/" title="linux">linux</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-09-17T09:16:53.000Z" title="Created 2025-09-17 17:16:53">2025-09-17</time></span></div><div class="content"> 解压文件： unzip latest.zip -d /var/www解压latest.zip到&#x2F;var&#x2F;www  </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/09/17/markdown/" title="markdown">markdown</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-09-17T08:22:34.000Z" title="Created 2025-09-17 16:22:34">2025-09-17</time></span></div><div class="content">markdown语法 插入图片![图片](链接) 插入链接[文字](链接)  </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/09/17/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%9B%BE/" title="多模态图">多模态图</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-09-17T07:00:02.000Z" title="Created 2025-09-17 15:00:02">2025-09-17</time></span></div><div class="content">MSGFusion: Multimodal Scene Graph-Guided Infrared and VisibleImage Fusion arxiv  挑战  Infrared and visible image fusion has garnered considerable attention owing to the strong complementarity of these two modalities in complex, harsh environments. While deep learning–based fusion methods have made remarkable advances in feature extraction, alignment, fusion, and reconstruction, they still depend largely on low-level visual cues, such as texture and contrast, and struggle to capture the high-le...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/09/17/hexo%E4%BD%BF%E7%94%A8/" title="hexo使用">hexo使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-09-17T06:35:13.000Z" title="Created 2025-09-17 14:35:13">2025-09-17</time></span></div><div class="content">windows 配置hexo 安装node.js(目前不理解是具体干嘛的) 安装cnpmnpm i -g cnpm --registry.npm.taobao.org 安装hexocnpm install -g hexo-cli 初始化目录  12345d:cd filemkdir blogcd bloghexo init  # 初始化  创建新文档hexo new &quot;我的第一篇hexo博客&quot; 将博客部署到github上 首先创建一个新的仓库： 仓库名是固定的：必须是你的用户名.github.io 回到windows终端安装一个插件cnpm install --save hexo-deployer-git 修改配置文件_config.yml（就在博客目录下）,在最下方找到 Deployment,修改配置如下(注意：每个冒号后都要有空格)：   123456# Deployment ## Docs: https://hexo.io/docs/one-command-deployment deploy:   type: git  repo: https://git...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/09/17/first/" title="first">first</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-09-17T01:37:24.000Z" title="Created 2025-09-17 09:37:24">2025-09-17</time></span></div><div class="content">###哈哈哈哈  hello  </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2025/09/17/hello-world/" title="Hello World">Hello World</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2025-09-17T01:33:18.832Z" title="Created 2025-09-17 09:33:18">2025-09-17</time></span></div><div class="content">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;  More info: Writing Run server1$ hexo server  More info: Server Generate static files1$ hexo generate  More info: Generating Deploy to remote sites1$ hexo deploy  More info: Deployment </div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">John Doe</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/18/llm%E5%9F%BA%E7%A1%80/" title="llm基础">llm基础</a><time datetime="2025-09-18T07:21:23.000Z" title="Created 2025-09-18 15:21:23">2025-09-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/17/linux/" title="linux">linux</a><time datetime="2025-09-17T09:16:53.000Z" title="Created 2025-09-17 17:16:53">2025-09-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/17/markdown/" title="markdown">markdown</a><time datetime="2025-09-17T08:22:34.000Z" title="Created 2025-09-17 16:22:34">2025-09-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/17/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%9B%BE/" title="多模态图">多模态图</a><time datetime="2025-09-17T07:00:02.000Z" title="Created 2025-09-17 15:00:02">2025-09-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/17/hexo%E4%BD%BF%E7%94%A8/" title="hexo使用">hexo使用</a><time datetime="2025-09-17T06:35:13.000Z" title="Created 2025-09-17 14:35:13">2025-09-17</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/web/" style="font-size: 1.1em; color: #999">web</a> <a href="/tags/ML/" style="font-size: 1.1em; color: #999">ML</a> <a href="/tags/LLM/" style="font-size: 1.1em; color: #999">LLM</a> <a href="/tags/md/" style="font-size: 1.1em; color: #999">md</a> <a href="/tags/PAPER/" style="font-size: 1.1em; color: #999">PAPER</a> <a href="/tags/linux/" style="font-size: 1.1em; color: #999">linux</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>Archives</span>
       
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
   
-    <article id="post-llm基础" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/09/18/llm%E5%9F%BA%E7%A1%80/" class="article-date">
-  <time class="dt-published" datetime="2025-09-18T07:21:23.000Z" itemprop="datePublished">2025-09-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/09/18/llm%E5%9F%BA%E7%A1%80/">llm基础</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
+    <ul class="card-archive-list">
       
-        <p>llm训练和微调的基础教程：《从零开始的 LLM》</p>
-
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              September 2025
+            </span>
+            <span class="card-archive-list-count">7</span>
+          </a>
+        </li>
       
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/09/18/llm%E5%9F%BA%E7%A1%80/" data-id="cmfp35rwd00005cumfixd1xt3" data-title="llm基础" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-linux" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/09/17/linux/" class="article-date">
-  <time class="dt-published" datetime="2025-09-17T09:16:53.000Z" itemprop="datePublished">2025-09-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/09/17/linux/">linux</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>解压文件： <code>unzip latest.zip -d /var/www</code>解压latest.zip到&#x2F;var&#x2F;www</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/09/17/linux/" data-id="cmfnrvo450000m4umcq3o4oha" data-title="linux" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-markdown" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/09/17/markdown/" class="article-date">
-  <time class="dt-published" datetime="2025-09-17T08:22:34.000Z" itemprop="datePublished">2025-09-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/09/17/markdown/">markdown</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="markdown语法"><a href="#markdown语法" class="headerlink" title="markdown语法"></a>markdown语法</h1><ul>
-<li>插入图片<code>![图片](链接)</code></li>
-<li>插入链接<code>[文字](链接)</code></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/09/17/markdown/" data-id="cmfnri0ou0006hcumd6gpfcrq" data-title="markdown" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/md/" rel="tag">md</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-多模态图" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/09/17/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%9B%BE/" class="article-date">
-  <time class="dt-published" datetime="2025-09-17T07:00:02.000Z" itemprop="datePublished">2025-09-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/09/17/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%9B%BE/">多模态图</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2509.12901">MSGFusion: Multimodal Scene Graph-Guided Infrared and Visible<br>Image Fusion</a> arxiv</p>
-<ul>
-<li>挑战</li>
-</ul>
-<p>Infrared and visible image fusion has garnered considerable attention owing to the strong complementarity of these two modalities in complex, harsh environments. While deep learning–based fusion methods have made remarkable advances in feature extraction, alignment, fusion, and reconstruction, they still depend largely on low-level visual cues, such as texture and contrast, and struggle to capture the high-level semantic information embedded in images. Recent attempts to incorporate text as a source of semantic guidance have relied on unstructured descriptions that neither explicitly model entities, attributes, and relationships nor provide spatial localization, thereby limiting fine-grained fusion performance.</p>
-<ul>
-<li>方法</li>
-</ul>
-<ol>
-<li>多模态场景图生成<ul>
-<li>视觉场景图表示：为实现图像中物体及其语义关系的结构化建模，视觉模态采用基于目标检测和图神经推理的场景图构建流程。该模块包含三个阶段：Target Area Proposals、Feature Extraction和Scene Graph Reasoning。<ul>
-<li>Target Area Proposals：采用Faster RCNN作为基础目标检测器，给定可见图像 $I_vi$，RPN通过多尺度特征金字塔预测出一组候选边界框$B &#x3D; {b1，b2，…，bn}$，其中每个边界框对应一个潜在物体区域；这些区域随后作为场景图结构中的实体节点（物体-属性对）。</li>
-<li>Feature Extraction：区域级特征从上述候选框的主干特征图中提取，用于初始化场景图节点的视觉表征。具体而言，对于每个候选框$bi$，在固定空间分辨率下应用ROI池化操作，从而从主干特征图F中获取对应的视觉特征向量$fi∈Rd$：$fi &#x3D; ROIpool(F, bi)$,其中向量fi捕捉候选框bi在其空间位置上的语义表示，并作为输入图神经网络的初始节点特征。然而，仅对目标节点进行建模并不足以捕捉实体之间的结构依赖性和空间交互作用。为了进一步探索候选对象之间的上下文语义关系，需要构建一个联合框。对于每一对候选框（bi，bj），定义其交互区域为：ui→j&#x3D;bi∪bj，并基于视觉特征图F提取该区域的特征：fi→j&#x3D;ROIpool（F，ui→j）。至此，每个候选对象对（bi，bj）都获得了由三个特征组成的三元组(fi，fj，fi→j），分别表征其语义实体、交互目标和空间关系，从而为后续的图神经语义推理提供表征支持。</li>
-<li>Scene Graph Reasoning：为实现对象节点与关系边之间的交互式关联，本研究提出了一种基于门控循环单元（GRU）的迭代图神经网络（GNN），作为场景图推理模块。在构建的图结构中，节点代表对象实体，边则编码实体间的语义关系（如空间或功能依赖）。该模块通过多轮信息传递更新图状态，从而实现语义增强与结构感知。<br><img src="/../image/MSG2.png" alt="公式">经过多轮迭代后，节点和边的隐藏状态封装了上下文语义信息，从而形成了完整的图级嵌入。为了获得最终的视觉场景图表示，模型会对图节点进行筛选，选取得分最高的n个对象节点{o1，o2，…，on}及其关联关系，构建出一系列局部子图：Gk &#x3D; (ok, Rk), k &#x3D; 1, . . . , n其中Rk表示连接对象ok与其他节点的语义边集合。针对每个子图Gk，我们引入一个读出函数来聚合其节点和边的隐藏状态，从而生成最终的嵌入向量vk∈R d：vk &#x3D; Readout({hi}i∈Gk,{hi-&gt;j}(i,j)∈Gk）</li>
-</ul>
-</li>
-<li>文本场景图表示：为实现文本描述中对象及其语义关系的结构化建模，我们采用基于句法分析和GRU的语言模态文本场景图构建流程。该模块包含四个核心阶段：scene graph parsing, semantic concept encoding, object–attribute graph attention, and object–object relation graph attention.<ul>
-<li>Scene Graph Parsing：给定自然语言描述y，首先采用基于依存句法分析的规则解析器，将句子转换为结构化场景图表示G &#x3D;（V，E）。该图明确编码了文本中的语义实体及其关系，从而提供更清晰显著的拓扑结构，便于后续跨模态语义对齐与融合。具体而言，节点集V &#x3D; O∪A包含对象节点O &#x3D; {oi}和属性节点A &#x3D; {ai}，边集E &#x3D; EOA∪EOO由对象-属性边EOA⊆O×A和对象-对象关系边EOO⊆O×O构成。解析器首先识别输入文本中的语义实体（名词短语）和属性修饰语（形容词短语），随后利用语义谓词（如介词或动词短语）构建实体间关系。为提高解析精度，我们专门设计了专用于代词消解、复数实体分解和数值规范化处理的规则，确保生成的场景图具有更高的语义保真度和结构精细度。</li>
-<li>Semantic Concept Encoding：参数未解释，有待进一步研究。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p><img src="/../image/MSG1.png" alt="框架图"></p>
-<ul>
-<li>其中有文本场景图和视觉场景图的介绍，可以具体参考学习</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/09/17/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%9B%BE/" data-id="cmfnri0ou0005hcumenrkgcko" data-title="多模态图" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ML/" rel="tag">ML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PAPER/" rel="tag">PAPER</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hexo使用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/09/17/hexo%E4%BD%BF%E7%94%A8/" class="article-date">
-  <time class="dt-published" datetime="2025-09-17T06:35:13.000Z" itemprop="datePublished">2025-09-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/09/17/hexo%E4%BD%BF%E7%94%A8/">hexo使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="windows-配置hexo"><a href="#windows-配置hexo" class="headerlink" title="windows 配置hexo"></a>windows 配置hexo</h1><ol>
-<li>安装<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/download">node.js</a>(目前不理解是具体干嘛的)</li>
-<li>安装cnpm<code>npm i -g cnpm --registry.npm.taobao.org</code></li>
-<li>安装hexo<code>cnpm install -g hexo-cli</code></li>
-<li>初始化目录</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d:</span><br><span class="line">cd file</span><br><span class="line">mkdir blog</span><br><span class="line">cd blog</span><br><span class="line">hexo init  # 初始化</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>创建新文档<code>hexo new &quot;我的第一篇hexo博客&quot;</code></li>
-<li>将博客部署到github上<ul>
-<li>首先创建一个新的仓库： 仓库名是固定的：必须是你的用户名.github.io</li>
-<li>回到windows终端安装一个插件<code>cnpm install --save hexo-deployer-git</code></li>
-<li>修改配置文件_config.yml（就在博客目录下）,在最下方找到 Deployment,修改配置如下(注意：每个冒号后都要有空格)：</li>
-</ul>
- <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment </span><br><span class="line">## Docs: https://hexo.io/docs/one-command-deployment </span><br><span class="line">deploy: </span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/wuhuaxiansheng/wuhuaxiansheng.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
-<ul>
-<li>window执行<code>npm install hexo-deployer-git --save</code></li>
-</ul>
-</li>
-<li>最后依次执行</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 清理 Hexo 缓存</span><br><span class="line">hexo clean</span><br><span class="line"># 重新生成静态文件</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-<p>8.美化：<a target="_blank" rel="noopener" href="https://butterfly.zhheo.com/Introduction.html">https://butterfly.zhheo.com/Introduction.html</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/09/17/hexo%E4%BD%BF%E7%94%A8/" data-id="cmfnri0os0002hcum2e9vght1" data-title="hexo使用" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-first" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/09/17/first/" class="article-date">
-  <time class="dt-published" datetime="2025-09-17T01:37:24.000Z" itemprop="datePublished">2025-09-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/09/17/first/">first</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>###哈哈哈哈</p>
-<ul>
-<li>hello</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/09/17/first/" data-id="cmfnri0or0001hcumhq9jen4k" data-title="first" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/09/17/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2025-09-17T01:33:18.832Z" itemprop="datePublished">2025-09-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/09/17/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/09/17/hello-world/" data-id="cmfnri0on0000hcum6tm3970d" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/" rel="tag">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PAPER/" rel="tag">PAPER</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/md/" rel="tag">md</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/LLM/" style="font-size: 10px;">LLM</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/PAPER/" style="font-size: 10px;">PAPER</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/md/" style="font-size: 10px;">md</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/09/">September 2025</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/09/18/llm%E5%9F%BA%E7%A1%80/">llm基础</a>
-          </li>
-        
-          <li>
-            <a href="/2025/09/17/linux/">linux</a>
-          </li>
-        
-          <li>
-            <a href="/2025/09/17/markdown/">markdown</a>
-          </li>
-        
-          <li>
-            <a href="/2025/09/17/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%9B%BE/">多模态图</a>
-          </li>
-        
-          <li>
-            <a href="/2025/09/17/hexo%E4%BD%BF%E7%94%A8/">hexo使用</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Website Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article Count :</div><div class="item-count">7</div></div><div class="webinfo-item"><div class="item-name">Unique Visitors :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Page Views :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Update :</div><div class="item-count" id="last-push-date" data-lastPushDate="2025-09-18T12:55:29.697Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By John Doe</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.0</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
